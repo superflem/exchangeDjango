@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3c700015.css",
+    "main.js": "/static/js/main.d8dc74d8.js",
+    "static/js/787.7994c454.chunk.js": "/static/js/787.7994c454.chunk.js",
+    "static/media/planisfero.jpeg": "/static/media/planisfero.d704d43d47fd70d2ce8e.jpeg",
+    "index.html": "/index.html",
+    "main.3c700015.css.map": "/static/css/main.3c700015.css.map",
+    "main.d8dc74d8.js.map": "/static/js/main.d8dc74d8.js.map",
+    "787.7994c454.chunk.js.map": "/static/js/787.7994c454.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3c700015.css",
+    "static/js/main.d8dc74d8.js"
+  ]
+}
