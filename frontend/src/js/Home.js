@@ -6,7 +6,7 @@ const Home = (props) => {
     const nome = props.nome;
 
     const handleLoginForm = async (e) => {
-
+        const url = "http://localhost:8000/uploadImage/";
     }
 
     return (
