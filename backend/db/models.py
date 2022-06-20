@@ -9,7 +9,7 @@ class Utente(models.Model):
     email = models.CharField(max_length=40, unique=True)
     password = models.CharField(max_length=127)
     iban = models.CharField(max_length=27, unique=True)
-    foto = models.CharField(max_length=20)
+    foto = models.CharField(max_length=20, default="default.png")
     euro = models.FloatField()
     dollari = models.FloatField()
 

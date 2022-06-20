@@ -44,26 +44,15 @@ const Signup = () => {
         const risposta = await axios.post(url, corpo);
         const oggetto = risposta.data;
 
-        if (!oggetto["isTuttoOk"])
-        {
-            if (oggetto["messaggio"].search("utente_email_key") !== -1)
-            {
-                alert("questa email è già usata");
-            }
-            else if (oggetto["messaggio"].search("utente_iban_key") !== -1)
-            {
-                alert("questo IBAN è già usato");
-            }
-            else
-            {
-                alert(oggetto["messaggio"]);
-            }
-        }
-        else
-        {
-            alert(oggetto["messaggio"]);
-            const link = window.location.href.replace('/signup', ''); //rimando alla pagina principale di login
-            window.location.replace(link);
+        alert(oggetto["messaggio"]);
+        
+        if (oggetto["isTuttoOk"]) { // se è tutto ok, mi loggo
+            const url2 = "http://localhost:8000/login/";
+            const body2 = {email: email, password: password, withCredentials: true};
+            await axios.post(url2, body2);
+
+            const link2 = window.location.href.replace('/signup', '/home'); //rimando alla pagina principale di login
+            window.location.replace(link2);
         }
     }
 

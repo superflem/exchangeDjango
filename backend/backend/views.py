@@ -138,3 +138,51 @@ def listTransactions(request):
         return HttpResponse(json.dumps(risposta))
     except Exception as e:
         return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
+
+
+
+
+
+#from db.serializers import UtenteSerializer
+# endpoint per le richieste al db che richiedono valuta e valore
+@api_view(['OPTION', 'POST'])
+def uploadImage(request):
+    if (str(request.method) == 'OPTION'): # se è il preflight
+        return HttpResponse("option")
+
+    try:
+        decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
+
+        risposta = query.updateImage(decodificato["id"], request.FILES["foto"])
+
+        return HttpResponse(json.dumps(risposta))
+
+    except Exception as e:
+        print("aaa: ", e)
+        return HttpResponse(json.dumps({"isTuttoOk": False, "ridirezione": True}))
+
+
+
+# from db.serializers import UtenteSerializer
+# endpoint per restituire la foto
+@api_view(['OPTION', 'POST'])
+def getImage(request):
+    if (str(request.method) == 'OPTION'): # se è il preflight
+        return HttpResponse("option")
+
+    #return HttpResponse(json.dumps({"messaggio": "ciao"}))
+
+    try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
+        decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
+        
+
+        risposta = query.getImage(decodificato["id"])
+
+        return FileResponse(risposta)
+    except Exception as e:
+        return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
+
+
+
+    
+    

@@ -7,6 +7,7 @@ import requests # pip install requests
 import xmltodict # pip install xmltodict
 from datetime import datetime # funzione che restituisce la data attuale
 import json
+import os
 
 #funzione che effetua il cambio euro dollaro prendendo 
 # l'attale cambio in tempo reale dal file xml della bce
@@ -134,3 +135,33 @@ class Query():
         return risultati
 
 
+    def updateImage(self, id, file):
+        try:
+            risultati = Utente.objects.get(id=id) # trovo l'utente
+            # rinomino il file con l'hash dell'id e lo salvo nel db
+            id_hashato = hash(str(id))
+            nome_file = str(id_hashato) + ".png"
+            risultati.foto = nome_file
+            risultati.save()
+
+            #salvo il file
+            with open('foto/'+nome_file, 'wb+') as destinazione:
+                for chunk in file.chunks():
+                    destinazione.write(chunk)
+            
+            return {"isTuttoOk": True, "ridirezione": False, "messaggio": "Immagine del profilo aggiornata con successo"}
+        except Exception as e:
+            return {"isTuttoOk": False, "ridirezione": False, "messaggio": "Qualcosa è andato storto"}
+
+        
+
+    def getImage(self, id): 
+        risultati = Utente.objects.get(id=id)
+        
+        percorso = risultati.foto
+        print(percorso)
+
+        percorso = os.path.abspath('') + "/foto/" + percorso
+        print(percorso)
+        img = open(percorso, 'rb')
+        return img

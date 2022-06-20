@@ -27,5 +27,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'), # se il pecorso è '/logout/' esegue la view logout
     path('buy/', views.deposit_withdraw_buy, name='buy'), # se il pecorso è '/buy/' esegue la view buy
     path('listTransactions/', views.listTransactions, name='listTransactions'), # se il pecorso è '/listTransactions/' esegue la view listTransactions
+    path('uploadImage/', views.uploadImage, name='uploadImage'), # se il pecorso è '/uploadImage/' esegue la view uploadImage
+    path('getImage/', views.getImage, name='getImage'), # se il pecorso è '/getImage/' esegue la view getImage
 
 ]
