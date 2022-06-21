@@ -11,35 +11,29 @@ import {useEffect} from 'react';
 import {useState} from 'react';
 
 const Loggato = () => {
-    //let nome = '';
     const [nome, setNome] = useState('');
     const [euro, setEuro] = useState(0);
     const [dollari, setDollari] = useState(0);
     const [getFoto, setGetFoto] = useState(null);
 
-    useEffect(async () =>{ //una volta caricata la pagina, controllo che il token sia valido e inserisco i valori dei soldi nella pagina html
+    useEffect(async () => { //una volta caricata la pagina, controllo che il token sia valido e inserisco i valori dei soldi nella pagina html
         const url = "http://localhost:8000/query/";
         const risposta = await axios.post(url);
-        //const oggetto = JSON.parse(risposta.data);
         const oggetto = risposta.data;
 
-        if (oggetto["ridirezione"])
-        {
+        if (oggetto["ridirezione"]) {
             alert('Sessione scaduta');
             window.location.href = 'http://localhost:3000/';
         }
-        else
-        {
-            if (oggetto["isTuttoOk"]) 
-            {
+        else {
+            if (oggetto["isTuttoOk"]) {
                 setNome(oggetto["nome"][0].toUpperCase() + oggetto["nome"].slice(1)); //metto la prima lettera maiuscola
                 setEuro(Number(oggetto["euro"]).toFixed(2));
                 setDollari(Number(oggetto["dollari"]).toFixed(2));
             }
             else
-            {
                 alert(oggetto["messaggio"]);
-            }
+            
         }
 
         // prendo la foto profilo

@@ -7,8 +7,7 @@ const Buy = (props) => {
     const dollari = props.dollari;
     const [max, setMax] = useState(dollari);
 
-    const handleLoginForm = async (e) =>
-    {
+    const handleLoginForm = async (e) => {
         e.preventDefault(); //evita di ricaricare la pagina
         const url = "http://localhost:8000/buy/";
 
@@ -23,31 +22,23 @@ const Buy = (props) => {
         const risposta = await axios.post(url, corpo);
         const oggetto = risposta.data;
 
-        if (oggetto["ridirezione"])
-        {
+        if (oggetto["ridirezione"]) {
             alert('Sessione scaduta');
             window.location.href = 'http://localhost:3000/';
         }
-        else
-        {
+        else {
             alert (oggetto["messaggio"]);
             if (oggetto["isTuttoOk"])
-            {
                 window.location.href = 'http://localhost:3000/home';
-            }
         }
     }
 
-    function cambiaMassimo(e) //cambio del massimo nella form in base alla valuta selezionata
-    {
+    function cambiaMassimo(e) { //cambio del massimo nella form in base alla valuta selezionata
         if (e.target.value == 'EUR')
-        {
             setMax(euro);
-        }
-        else
-        {
+        
+        else   
             setMax(dollari);
-        }
     }
 
     return (
@@ -64,7 +55,7 @@ const Buy = (props) => {
                 <input id='bottoneInterno' type='submit'/>
             </form>
         </div> 
-     );
+    );
 }
  
 export default Buy;

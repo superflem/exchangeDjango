@@ -11,8 +11,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
-
         <Switch>
           <Route exact path='/'>
             <Navbar />
@@ -27,9 +25,6 @@ function App() {
           <Route path='*'>  {/* una qualsiasi altra pagina*/}
               <Loggato />
           </Route>
-
-          
-
         </Switch>
       
       </div>

@@ -34,46 +34,37 @@ const ListTransactions = () => {
 
         //alert(oggetto["listaTransizioni"])
         
-        if (oggetto["ridirezione"])
-        {
+        if (oggetto["ridirezione"]) {
             alert('Sessione scaduta');
             window.location.href = 'http://localhost:3000/';
         }
-        else
-        {
-            if (oggetto["isTuttoOk"]) 
-            {
+        else {
+            if (oggetto["isTuttoOk"])  {
                 if (oggetto["listaTransizioni"] != '[]')
                     creaTabella(oggetto["listaTransizioni"]); //creo la tabella 
                 
             }
             else
-            {
-                alert(oggetto["messaggio"]);
-            }
+                alert(oggetto["messaggio"]);   
         }
     });
 
-    function creaTabella (lista)
-    {
+    function creaTabella (lista) {
         let nuovaTabella = '';
         let valutaComprata = '';
         let valutaSpesa = '';
-        for (let i = 0; i < lista.length; i++)
-        {
+        for (let i = 0; i < lista.length; i++) {
             if (i%2 == 1) //guardo se devo fare lo sfondo bianco o grigio
                 nuovaTabella = nuovaTabella + '<tr>';
             
             else
                 nuovaTabella = nuovaTabella + '<tr className = "dispari">';
             
-            if (lista[i]["valuta_comprata"] == 'USD') //setto le valute
-            {
+            if (lista[i]["valuta_comprata"] == 'USD') { //setto le valute
                 valutaComprata = '$';
                 valutaSpesa = '€';
             }
-            else
-            {
+            else {
                 valutaComprata = '€';
                 valutaSpesa = '$';
             }
@@ -92,15 +83,13 @@ const ListTransactions = () => {
         return data.slice(8, 10)+'-'+data.slice(5, 7)+'-'+data.slice(0, 4);
     }
 
-    const handleLoginForm = async (e) =>
-    {
+    const handleLoginForm = async (e) => {
         e.preventDefault();
         const data = e.target.data.value;
         const valuta = e.target.valuta.value;
 
         let nuovaQuery = 'http://localhost:3000/listTransactions';
-        if (data!='' || valuta!='')
-        {
+        if (data!='' || valuta!='') {
             nuovaQuery = nuovaQuery+'?'
             if (data!='' && valuta!='')
                 nuovaQuery = nuovaQuery+'data='+data+'&valuta='+valuta;
@@ -110,9 +99,7 @@ const ListTransactions = () => {
             
             else
                 nuovaQuery = nuovaQuery+'valuta='+valuta;
-            
         }
-
         window.location.href = nuovaQuery;
     }
 
@@ -144,13 +131,8 @@ const ListTransactions = () => {
                 </select> <br /> <br />
                 <input id='bottoneInterno' type='submit'/>
             </form>
-
-            
         </div> 
-        
-
-
-     );
+    );
 }
  
 export default ListTransactions;

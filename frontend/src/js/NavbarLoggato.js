@@ -4,8 +4,7 @@ import axios from 'axios';
 
 const NavbarLoggato = () => {
 
-    const logout = async (e) =>
-    {
+    const logout = async (e) => {
         const url = 'http://localhost:8000/logout/';
         const risposta = await axios.post(url);
         window.location.href = 'http://localhost:3000/';

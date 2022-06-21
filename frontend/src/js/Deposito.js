@@ -2,9 +2,7 @@ import '../css/Form.css';
 import axios from 'axios';
 const Deposito = () => {
 
-    const handleLoginForm = async (e) =>
-    {
-        //alert(e.target.valore.value+" "+e.target.valuta.value);
+    const handleLoginForm = async (e) => {
         e.preventDefault(); //evita di ricaricare la pagina
         const url = "http://localhost:8000/deposit/";
 
@@ -20,16 +18,13 @@ const Deposito = () => {
         const oggetto = risposta.data;
 
         if (oggetto["ridirezione"])
-        {
             window.location.href = 'http://localhost:3000/';
-        }
-        else
-        {
+        
+        else {
             alert (oggetto["messaggio"]);
             if (oggetto["isTuttoOk"])
-            {
                 window.location.href = 'http://localhost:3000/home';
-            }
+            
         }
     }
 
@@ -49,10 +44,7 @@ const Deposito = () => {
 
             
         </div> 
-        
-
-
-     );
+    );
 }
  
 export default Deposito;

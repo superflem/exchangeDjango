@@ -13,8 +13,7 @@ const Signup = () => {
     const passwordInput = useRef();
     const password2Input = useRef();
 
-    const handleLoginForm = async (e) =>
-    {
+    const handleLoginForm = async (e) => {
         e.preventDefault(); //evita di ricaricare la pagina
         const url = "http://localhost:8000/signup/";
 
@@ -26,9 +25,7 @@ const Signup = () => {
         let password = passwordInput.current.value;
 
         if (password !== password2)
-        {
             alert("le due password devono essere uguali");
-        }
 
         password = sha3_512(password); //cifro la password
 

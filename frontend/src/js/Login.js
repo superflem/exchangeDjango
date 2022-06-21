@@ -9,8 +9,7 @@ const Login = () => {
     const emailInput = useRef();
     const passwordInput = useRef();
 
-    const handleLoginForm = async (e) =>
-    {
+    const handleLoginForm = async (e) => {
         e.preventDefault(); //evita di ricaricare la pagina
         const url = "http://localhost:8000/login/";
         const email = emailInput.current.value;
@@ -22,11 +21,9 @@ const Login = () => {
         const risposta = await axios.post(url, corpo);
         const oggetto = risposta.data;
         if (!oggetto["isTuttoOk"]) //se c'è un errore lo comunico, altrimenti procedo
-        {
             alert(oggetto["messaggio"]);
-        }
-        else //se avviene con successo il login
-        {
+        
+        else { //se avviene con successo il login
             alert("Autenticazione avvenuta");
             const link = window.location.href + 'home'; //rimando alla pagina principale di login
             window.location.replace(link);
@@ -44,10 +41,7 @@ const Login = () => {
                 <button id='bottone' type='submit'> Invia</button>
             </form>
         </div> 
-        
-
-
-     );
+    );
 }
  
 export default Login;

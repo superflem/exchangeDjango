@@ -7,8 +7,7 @@ const Withdraw = (props) => {
     const dollari = props.dollari;
     const [max, setMax] = useState(dollari);
 
-    const handleLoginForm = async (e) =>
-    {
+    const handleLoginForm = async (e) => {
         e.preventDefault(); //evita di ricaricare la pagina
         const url = "http://localhost:8000/withdraw/";
 
@@ -23,13 +22,11 @@ const Withdraw = (props) => {
         const risposta = await axios.post(url, corpo);
         const oggetto = risposta.data;
 
-        if (oggetto["ridirezione"])
-        {
+        if (oggetto["ridirezione"]) {
             alert('Sessione scaduta');
             window.location.href = 'http://localhost:3000/';
         }
-        else
-        {
+        else {
             alert (oggetto["messaggio"]);
             if (oggetto["isTuttoOk"])
             {
@@ -38,16 +35,13 @@ const Withdraw = (props) => {
         }
     }
 
-    function cambiaMassimo(e) //cambio il massimo di soldi nella form in base alla valuta
-    {
+    function cambiaMassimo(e) { //cambio il massimo di soldi nella form in base alla valuta
         if (e.target.value === 'EUR')
-        {
             setMax(euro);
-        }
+        
         else
-        {
             setMax(dollari);
-        }
+        
     }
 
     return (
