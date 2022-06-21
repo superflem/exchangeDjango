@@ -6,8 +6,8 @@ const Soldi = (props) => {
     return (
         <nav className="navbar">
             <div className="divLink">
-                <label id="euro">{euro} €</label>
-                <label id="dollari">{dollari} $</label>
+                <label className="soldii" id="euro">{euro} €</label>
+                <label className="soldii" id="dollari">{dollari} $</label>
             </div>
         </nav>
     );

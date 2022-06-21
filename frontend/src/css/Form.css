@@ -1,11 +1,9 @@
-label
-{
+label {
     color:red;
     font-size: 30px;
 }
 
-.testo
-{
+.testo {
     width: 50%;
     height: 50px;
     border-radius: 15px;
@@ -13,8 +11,7 @@ label
     font-size: 20px;
 }
 
-#bottone
-{
+#bottone {
     background-color: gold;
     height: 40px;
     width: 5%;
@@ -22,13 +19,12 @@ label
     font-size: 15px;
 }
 
-#bottone:hover, #bottoneInterno:hover
-{
+#bottone:hover, #bottoneInterno:hover {
+    cursor: pointer;
     background-color: red;
 }
 
-#bottoneInterno
-{
+#bottoneInterno {
     background-color: gold;
     height: 40px;
     width: 10%;
@@ -36,29 +32,27 @@ label
     font-size: 15px;
 }
 
-select
-{
+select {
     width: 50%;
     height: 40px;
     text-align: center;
     border-radius: 10px;
 }
 
-.divForm
-{
+.divForm {
     background-color: blue;
     width: 50%;
     margin: auto;
     opacity: 0.7;
     border-radius: 10px;
-    margin-top: 15%;
+    margin-top: 5%;
     padding-bottom: 15px;
 }
 
-#data
-{
+#data {
     height: 40px;
     width: 50%;
     text-align: center;
     border-radius: 10px;
+    cursor: pointer
 }

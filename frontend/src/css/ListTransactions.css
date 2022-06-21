@@ -1,5 +1,4 @@
-.listTransactions
-{
+.listTransactions {
     background-color: blue;
     width: 50%;
     margin: auto;
@@ -9,21 +8,18 @@
     padding-bottom: 15px;
 }
 
-table
-{
+table {
     width:80%;
     margin:auto;
     background-color: white;
     border-collapse: collapse;
 }
 
-.dispari
-{
+.dispari {
     background-color: lightgray;
 }
 
-td, th
-{
+td, th {
     border: 1px solid black;
     height: 50px;
 }

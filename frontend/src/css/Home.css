@@ -1,19 +1,57 @@
-h1{
+h1 {
     color: white;
     font-size: 50px;
 }
 
-h2{
+h2 {
     color:white;
     font-size: 40px;
 }
 
-.divHome
-{
+.divHome {
     background-color: blue;
     width: 50%;
     margin: auto;
     opacity: 0.7;
     border-radius: 10px;
-    margin-top: 15%;
+    margin-top: 5%;
+}
+
+#foto {
+    width: 30%;
+    height: 30%;
+    border-radius: 50px 20px;
+}
+
+#file {
+    display: none;
+}
+
+#labelFile {
+    background-color: gold;
+    height: 90%;
+    width: 5%;
+    border-radius: 10px;
+    font-size: 15px;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 7px;
+}
+
+#labelFile:hover {
+    background-color: red;
+    cursor: pointer
+}
+
+
+#divFile {
+    height: 30px;
+}
+
+
+#spanFile {
+    color: white;
+    padding-left: 5px;
 }

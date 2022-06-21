@@ -5,8 +5,7 @@
     height: 50px;
 }
 
-.link
-{
+.link {
     position: relative;
     top: 15px;
     background-color: gold;
@@ -18,7 +17,7 @@
     font-size: 25px;
 }
 
-.link:hover
-{
+.link:hover {
     background-color: red;
+    cursor: pointer;
 }

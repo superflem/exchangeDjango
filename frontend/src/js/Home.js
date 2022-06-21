@@ -9,6 +9,7 @@ const Home = (props) => {
     const getFoto = props.foto;
 
     const [foto, setFoto] = useState();
+    const [descrizione, setDescrizione] = useState("Scegli un'immagine");
 
     const handleLoginForm = async (e) => {
         const url = "http://localhost:8000/uploadImage/";
@@ -28,20 +29,29 @@ const Home = (props) => {
             <h1>Benvenuto</h1>
             <h2>{nome}</h2>
 
-            <form encType="multipart/form-data" onSubmit = {handleLoginForm}>
-
-                <input type="file" onChange={e => setFoto(e.target.files[0])}/>
-                <button id='bottone' type='submit'> Invia</button>
-            </form>
             {   !!getFoto && 
-                <img src={getFoto} alt="Foto profilo"/>
+                <img id="foto" src={getFoto} alt="Foto profilo"/>
             }
 
-            
+            <form encType="multipart/form-data" onSubmit = {handleLoginForm}>
+                <br />
+                <div id="divFile">
+                    <label id="labelFile" htmlFor="file">
+                        Scegli
+                        <input id="file" accept="image/png, image/jpg, image/gif, image/jpeg" type="file" onChange={e => {setFoto(e.target.files[0]); setDescrizione(e.target.files[0].name);}}/>
+                    </label>
+                    <span id="spanFile">
+                        {descrizione}
+                    </span>
+                </div>
+                <br />
+                <br />
+
+                <button id='bottone' type='submit'> Invia</button>
+                
+            </form>   
+            <br />         
         </div> 
-        
-
-
     );
 }
  
