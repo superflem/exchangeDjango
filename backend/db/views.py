@@ -159,9 +159,7 @@ class Query():
         risultati = Utente.objects.get(id=id)
         
         percorso = risultati.foto
-        print(percorso)
 
         percorso = os.path.abspath('') + "/foto/" + percorso
-        print(percorso)
         img = open(percorso, 'rb')
         return img

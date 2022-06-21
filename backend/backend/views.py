@@ -165,7 +165,7 @@ def uploadImage(request):
 
 # from db.serializers import UtenteSerializer
 # endpoint per restituire la foto
-@api_view(['OPTION', 'POST'])
+@api_view(['OPTION', 'POST', 'GET'])
 def getImage(request):
     if (str(request.method) == 'OPTION'): # se è il preflight
         return HttpResponse("option")

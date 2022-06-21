@@ -15,6 +15,7 @@ const Loggato = () => {
     const [nome, setNome] = useState('');
     const [euro, setEuro] = useState(0);
     const [dollari, setDollari] = useState(0);
+    const [getFoto, setGetFoto] = useState(null);
 
     useEffect(async () =>{ //una volta caricata la pagina, controllo che il token sia valido e inserisco i valori dei soldi nella pagina html
         const url = "http://localhost:8000/query/";
@@ -40,7 +41,23 @@ const Loggato = () => {
                 alert(oggetto["messaggio"]);
             }
         }
+
+        // prendo la foto profilo
+        const url2 = "http://localhost:8000/getImage/";
+        const risposta2 = await axios.get(url2, {responseType: "blob"});
+        getBase64(risposta2.data, (foto) => {setGetFoto(foto)});
     });
+
+    function getBase64(file, cb) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            cb(reader.result)
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
 
     
 
@@ -52,7 +69,7 @@ const Loggato = () => {
 
                 <Switch>
                     <Route exact path='/home'>
-                        <Home nome={nome}/>
+                        <Home nome={nome} foto={getFoto}/>
                     </Route>
 
                     <Route exact path='/deposit'>
