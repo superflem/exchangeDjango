@@ -5,9 +5,10 @@ import json # già installato
 from django.http import  HttpResponse, FileResponse
 import jwt
 from db.views import Query # importo le query al db
-import os
+from db.signup import Signup
 
 query = Query()
+signupp = Signup()
 
 def controlla_corpo(request):
     body = {}
@@ -34,7 +35,7 @@ def signup(request):
     if (not ("nome" in body and "cognome" in body and "iban" in body and "password" in body and "email" in body)): # controllo che ci siano tutti gli attributi
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
 
-    return HttpResponse(json.dumps(query.signup(body)))
+    return HttpResponse(json.dumps(signupp.signup(body)))
 
 # endpoint per il login
 @api_view(['OPTION', 'POST'])
@@ -52,12 +53,11 @@ def login(request):
 
     [rispostaDb, id] = query.login(body)
     response = HttpResponse(json.dumps(rispostaDb)) # effettuo il login
-    if (id):
+    if (id): # se c'è l'id vuol dire che sono loggato e posso creare il jwt
         token = jwt.encode(id, "password") # crea il jwt
         response.set_cookie('jwt', token, max_age=900, httponly='true') # setta il cookie jwt che dura per massimo 15 minuti in modo httponly
 
     return response
-
 
 # endpoint per la query dei soldi
 @api_view(['OPTION', 'POST'])
@@ -94,8 +94,11 @@ def deposit_withdraw_buy(request):
     if (body == False):
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
 
-    # controllo gli attributi
-    if ((not ("valuta" in body and "valore" in body)) or float(body["valore"]) <= 0 or (not(body["valuta"] == "EUR") and not(body["valuta"] == "USD"))): # controllo che ci siano tutti gli attributi
+    # controllo gli attributi (che siano dei float)
+    try:
+        if ((not ("valuta" in body and "valore" in body)) or float(body["valore"]) <= 0 or (not(body["valuta"] == "EUR") and not(body["valuta"] == "USD"))): # controllo che ci siano tutti gli attributi
+            return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
+    except:
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
 
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
@@ -126,13 +129,12 @@ def listTransactions(request):
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
 
     # controllo gli attributi
-    if (not ("data" in body and "valuta" in body)): # controllo che ci siano tutti gli attributi
+    if (not ("data" in body and "valuta" in body) or (not(body["valuta"] == "EUR") and not(body["valuta"] ==  "USD"))): # controllo che ci siano tutti gli attributi
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
     
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
         
-
         risposta = query.listTransactions(decodificato["id"], body["valuta"], body["data"])
 
         return HttpResponse(json.dumps(risposta))
@@ -140,10 +142,6 @@ def listTransactions(request):
         return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
 
 
-
-
-
-#from db.serializers import UtenteSerializer
 # endpoint per le richieste al db che richiedono valuta e valore
 @api_view(['OPTION', 'POST'])
 def uploadImage(request):
@@ -162,15 +160,11 @@ def uploadImage(request):
         return HttpResponse(json.dumps({"isTuttoOk": False, "ridirezione": True}))
 
 
-
-# from db.serializers import UtenteSerializer
 # endpoint per restituire la foto
 @api_view(['OPTION', 'POST', 'GET'])
 def getImage(request):
     if (str(request.method) == 'OPTION'): # se è il preflight
         return HttpResponse("option")
-
-    #return HttpResponse(json.dumps({"messaggio": "ciao"}))
 
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
@@ -181,8 +175,3 @@ def getImage(request):
         return FileResponse(risposta)
     except Exception as e:
         return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
-
-
-
-    
-    

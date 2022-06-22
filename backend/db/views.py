@@ -9,7 +9,7 @@ from datetime import datetime # funzione che restituisce la data attuale
 import json
 import os
 
-#funzione che effetua il cambio euro dollaro prendendo 
+# funzione che effetua il cambio euro dollaro prendendo 
 # l'attale cambio in tempo reale dal file xml della bce
 def cambio(valuta, valore):
     url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml?46f0dd7988932599cb1bcac79a10a16a"
@@ -30,20 +30,6 @@ def cambio(valuta, valore):
 
 
 class Query():
-    def signup(self, body):
-        try: # controllo che email e iban non siano già in uso
-            utente = Utente(nome=body["nome"], cognome=body["cognome"], email=body["email"], password=body["password"], iban=body["iban"], euro=0, dollari=0, foto="default.png")
-            utente.save()
-            return {"isTuttoOk": True, "messaggio": "Utente inserito correttamente"}
-        except Exception as e:
-            response = {"isTuttoOk": False}
-            if ("email" in str(e)): # analizzo gli errori
-                response["messaggio"] = "Email già in uso"
-            elif ("iban" in str(e)):
-                response["messaggio"] = "IBAN già in uso"
-            else:
-                response["messaggio"] = "Errore inatteso"
-            return response
 
     def login(self, body):
         risultati = Utente.objects.filter(email=body["email"], password=body["password"]) # faccio il login, se l'utente non esiste restituisco false
