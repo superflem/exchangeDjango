@@ -37,28 +37,6 @@ def signup(request):
 
     return HttpResponse(json.dumps(signupp.signup(body)))
 
-# endpoint per il login
-@api_view(['OPTION', 'POST'])
-def login(request):
-    if (str(request.method) == 'OPTION'): # se è il preflight
-        return HttpResponse("option")
-
-    body = controlla_corpo(request) # controllo sia un json
-    if (body == False):
-        return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
-
-    # controllo gli attributi
-    if (not ("password" in body and "email" in body)): # controllo che ci siano tutti gli attributi
-        return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
-
-    [rispostaDb, id] = query.login(body)
-    response = HttpResponse(json.dumps(rispostaDb)) # effettuo il login
-    if (id): # se c'è l'id vuol dire che sono loggato e posso creare il jwt
-        token = jwt.encode(id, "password") # crea il jwt
-        response.set_cookie('jwt', token, max_age=900, httponly='true') # setta il cookie jwt che dura per massimo 15 minuti in modo httponly
-
-    return response
-
 # endpoint per la query dei soldi
 @api_view(['OPTION', 'POST'])
 def queryy(request):
@@ -129,7 +107,7 @@ def listTransactions(request):
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
 
     # controllo gli attributi
-    if (not ("data" in body and "valuta" in body) or (not(body["valuta"] == "EUR") and not(body["valuta"] ==  "USD"))): # controllo che ci siano tutti gli attributi
+    if (not ("data" in body and "valuta" in body) or (not(body["valuta"] == "EUR") and not(body["valuta"] ==  "USD") and not(body["valuta"] ==  ""))): # controllo che ci siano tutti gli attributi
         return HttpResponse(json.dumps({"isTuttoOk":False, "errore":"formato della richiesta non corretta"}))
     
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce

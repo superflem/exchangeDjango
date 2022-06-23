@@ -4,6 +4,9 @@ import '../css/Form.css';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
+export const controllaEmail = (input = "") => input.includes("@"); // controlla che l'input della mail abbia la chiocciola
+export const controllaPassword = (input = "") => input.length === 128; // controlla che l'input della mail abbia la chiocciola
+
 const Login = () => {
     //servono per inviare i dati nel form
     const emailInput = useRef();
@@ -15,6 +18,19 @@ const Login = () => {
         const email = emailInput.current.value;
         let password = passwordInput.current.value;
         password = sha3_512(password); //cifro la password
+
+        // controllo la email
+        if (!controllaEmail(email)) {
+            alert("La email non è valida");
+            return;
+        }
+
+        // controllo la password
+        if (!controllaPassword(password)) {
+            alert("La password non è valida");
+            return;
+        }
+
         const corpo = {email: email, password: password, withCredentials: true}; //creo l'oggetto json da inviare al server
         
         //INVIO I DATI

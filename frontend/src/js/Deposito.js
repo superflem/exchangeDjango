@@ -1,5 +1,7 @@
 import '../css/Form.css';
 import axios from 'axios';
+import {controllaSoldi, controllaValuta} from './Buy';
+
 const Deposito = () => {
 
     const handleLoginForm = async (e) => {
@@ -8,6 +10,18 @@ const Deposito = () => {
 
         const valore = e.target.valore.value;
         const valuta = e.target.valuta.value;
+
+        // prendo il massimo valore che posso comprare
+        const max = -1;
+        if (!controllaSoldi(valore, max)) { // controlla i soldi
+            alert("Non hai inserito correttamente i soldi");
+            return;
+        }
+
+        if (!controllaValuta(valuta)) { // controlla la valuta
+            alert("Non hai inserito correttamente la valuta");
+            return;
+        }
 
         const corpo = {
             valore: valore,

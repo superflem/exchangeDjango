@@ -2,7 +2,12 @@ import { sha3_512 } from 'js-sha3';
 import { useRef } from 'react';
 import '../css/Form.css';
 import axios from 'axios';
+import {controllaEmail, controllaPassword} from './Login'
 axios.defaults.withCredentials = true;
+
+//export const controllaEmail = (input = "") => input.includes("@"); // controlla che l'input della mail abbia la chiocciola
+//export const controllaPassword = (input = "") => input.length === 128; // controlla che l'input della password abbia 128 caratteri
+export const controllaIban = (input = "") => input.length === 27; // controlla che l'input dell'iban abbia 27 caratteri
 
 const Signup = () => {
 
@@ -24,10 +29,30 @@ const Signup = () => {
         const password2 = password2Input.current.value;
         let password = passwordInput.current.value;
 
-        if (password !== password2)
+        if (password !== password2) {
             alert("le due password devono essere uguali");
+            return;
+        }
 
         password = sha3_512(password); //cifro la password
+
+        // controllo la email
+        if (!controllaEmail(email)) {
+            alert("La email non è valida");
+            return;
+        }
+
+        // controllo la password
+        if (!controllaPassword(password)) {
+            alert("La password non è valida");
+            return;
+        }
+
+        // controllo la password
+        if (!controllaIban(iban)) {
+            alert("L'iban non è valido");
+            return;
+        }
 
         const corpo = {
             nome: nome,

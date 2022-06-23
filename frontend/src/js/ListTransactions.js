@@ -3,15 +3,14 @@ import '../css/ListTransactions.css';
 import {useEffect} from 'react';
 import {useState} from 'react';
 import axios from 'axios';
+import {controllaValuta} from './Buy';
 const parse = require('html-react-parser');
 const ListTransactions = () => {
 
-    //const [tabella, setTabella] = useState('<tr><td></td><td></td><td></td></tr>');
     const [tabella, setTabella] = useState('');
     const url = "http://localhost:8000/listTransactions/";
 
     useEffect(async () =>{ //una volta caricata la pagina, controllo che il token sia valido e inserisco i valori dei soldi nella pagina html
-
         const posizioneValuta = window.location.href.indexOf('valuta='); //prendo il valore della valuta
         let valuta = '';
         if (posizioneValuta != -1)
@@ -31,8 +30,6 @@ const ListTransactions = () => {
 
         const risposta = await axios.post(url, corpo);
         const oggetto = risposta.data;
-
-        //alert(oggetto["listaTransizioni"])
         
         if (oggetto["ridirezione"]) {
             alert('Sessione scaduta');
@@ -42,7 +39,6 @@ const ListTransactions = () => {
             if (oggetto["isTuttoOk"])  {
                 if (oggetto["listaTransizioni"] != '[]')
                     creaTabella(oggetto["listaTransizioni"]); //creo la tabella 
-                
             }
             else
                 alert(oggetto["messaggio"]);   
@@ -87,6 +83,11 @@ const ListTransactions = () => {
         e.preventDefault();
         const data = e.target.data.value;
         const valuta = e.target.valuta.value;
+
+        if (valuta !== "" && !controllaValuta(valuta)) { // controlla la valuta
+            alert("Non hai inserito correttamente la valuta");
+            return;
+        }
 
         let nuovaQuery = 'http://localhost:3000/listTransactions';
         if (data!='' || valuta!='') {

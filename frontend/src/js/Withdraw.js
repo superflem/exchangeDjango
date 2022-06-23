@@ -1,6 +1,8 @@
 import '../css/Form.css';
 import axios from 'axios';
 import {useState} from 'react';
+import {controllaSoldi, controllaValuta} from './Buy';
+
 const Withdraw = (props) => {
 
     const euro = props.euro;
@@ -13,6 +15,23 @@ const Withdraw = (props) => {
 
         const valore = e.target.valore.value;
         const valuta = e.target.valuta.value;
+
+        // prendo il massimo valore che posso comprare
+        let max = 0;
+        if (valuta === "EUR")
+            max = euro;
+        else
+            max = dollari;
+
+        if (!controllaSoldi(valore, max)) { // controlla i soldi
+            alert("Non hai inserito correttamente i soldi");
+            return;
+        }
+
+        if (!controllaValuta(valuta)) { // controlla la valuta
+            alert("Non hai inserito correttamente la valuta");
+            return;
+        }
 
         const corpo = {
             valore: valore,

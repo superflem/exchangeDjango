@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from . import views, view_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup, name='signup'), # se il pecorso è '/signup/' esegue la view signup
-    path('login/', views.login, name='login'), # se il pecorso è '/login/' esegue la view login
+    path('login/', view_login.login, name='login'), # se il pecorso è '/login/' esegue la view login
     path('query/', views.queryy, name='query'), # se il pecorso è '/query/' esegue la view query
     path('withdraw/', views.deposit_withdraw_buy, name='withdraw'), # se il pecorso è '/withdraw/' esegue la view withdraw
     path('deposit/', views.deposit_withdraw_buy, name='deposit'), # se il pecorso è '/deposit/' esegue la view deposit
