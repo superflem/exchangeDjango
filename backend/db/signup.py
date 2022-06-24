@@ -21,7 +21,6 @@ class Signup():
             utente = Utente(nome=body["nome"], cognome=body["cognome"], email=body["email"], password=body["password"], iban=body["iban"], euro=0, dollari=0, foto="default.png")
             utente.save()
 
-            print(Utente.objects.all())
             return {"isTuttoOk": True, "messaggio": "Utente inserito correttamente"}
         except Exception as e:
             response = {"isTuttoOk": False}

@@ -45,7 +45,7 @@ class testSignup(TestCase):
         
 
     # controllo l'output del metodo prima inserendo un utente e poi rimettendo lo stesso iban
-    def testInserimento1(self):
+    def testInserimento2(self):
         # il primo è positivo
         body = {"nome": "mario", "cognome": "perna", "email":"mario.perna@gmail.com", "iban":"IT0000000000000000000000003", "password": "acd3a2ca97dd545afc16ccb52e497d42a0a05342215c15d5e4f56ccc69ab7e947bf98353b57a3cad8b2268714aae4ae7ac8653dee473a3d0a71c32e8da4d174b"}
         risultato = {"isTuttoOk": True, "messaggio": "Utente inserito correttamente"}
