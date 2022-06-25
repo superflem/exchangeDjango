@@ -7,7 +7,7 @@ class Utente(models.Model):
     nome = models.CharField(max_length=20)
     cognome = models.CharField(max_length=20)
     email = models.CharField(max_length=40, unique=True)
-    password = models.CharField(max_length=127)
+    password = models.CharField(max_length=128)
     iban = models.CharField(max_length=27, unique=True)
     foto = models.CharField(max_length=20, default="default.png")
     euro = models.FloatField()
