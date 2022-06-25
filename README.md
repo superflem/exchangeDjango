@@ -34,3 +34,6 @@ Esegue i test
 ----
 
 Per fare l'accesso come admin in Django, andare su [http://localhost:8000/admin](http://localhost:8000/admin) e inserire come username `root` e come password `root`
+
+### IMPORTANTE
+Non usare il server di Django mentre si è loggati come utente `root`, fare prima il logout
