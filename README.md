@@ -4,7 +4,7 @@
 Nella cartella di root del frontend, lanciare i seguenti comandi:
 
 ### `npm install`
-Installa tutti i moduli necessari per eseguire i file
+Installa tutti i moduli necessari presenti in package.json per eseguire i file
 
 ### `npm start`
 Esegue l'applicazione React. Apri [http://localhost:3000](http://localhost:3000) nel browser.
@@ -20,6 +20,10 @@ Nella cartella di root del backend lanciare il seguente comando:
 
 ### `pipenv shell`
 Si entra nell'ambiente virtuale di Django. Poi lanciare i seguenti comandi:
+
+
+#### `pipenv install`
+Installa le dipendenzepresenti nel Pipfile
 
 #### `python manage.py runserver`
 Lancia il backend
