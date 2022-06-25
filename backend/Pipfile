@@ -12,6 +12,7 @@ djangorestframework = "*"
 xmltodict = "*"
 django-excel-response2 = "*"
 django-admin = "*"
+requests = "*"
 
 [dev-packages]
 

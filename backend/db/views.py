@@ -6,7 +6,7 @@ from db.models import Utente, Transizione
 import requests # pip install requests
 import xmltodict # pip install xmltodict
 from datetime import datetime # funzione che restituisce la data attuale
-import json
+
 import os
 
 # funzione che effetua il cambio euro dollaro prendendo 

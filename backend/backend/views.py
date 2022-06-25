@@ -1,5 +1,4 @@
-from curses import has_key
-from urllib import response
+
 from rest_framework.decorators import api_view
 import json # già installato
 from django.http import  HttpResponse, FileResponse
