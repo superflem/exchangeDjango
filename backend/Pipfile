@@ -10,6 +10,8 @@ django-cors-headers = "*"
 django-six = "*"
 djangorestframework = "*"
 xmltodict = "*"
+django-excel-response2 = "*"
+django-admin = "*"
 
 [dev-packages]
 
