@@ -1,6 +1,6 @@
 import {controllaSoldi, controllaValuta} from '../js/Buy';
 
-describe("login", () => {
+describe("controlla valore", () => {
     test("convalida i soldi", () => {
         const soldi = 12;
         const max = 12;
@@ -24,7 +24,7 @@ describe("login", () => {
     });
 });
 
-describe("password", () => {
+describe("controlla valuta", () => {
     test("convalida la valuta", () => {
         const valuta = "EUR";
         expect(controllaValuta(valuta)).toBe(true); //input corretto

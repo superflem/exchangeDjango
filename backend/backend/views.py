@@ -5,19 +5,21 @@ from django.http import  HttpResponse, FileResponse
 import jwt
 from db.views import Query # importo le query al db
 from db.signup import Signup
+# from backend.controllaCorpo.controlla_corpo as controlla_corpo
 
-query = Query()
-signupp = Signup()
+# controlla_corpo = controllaCorpo.controlla_corpo
 
 def controlla_corpo(request):
     body = {}
-
-    try: # controllo che il body sia stato scritto in modo corretto
+    try:
         body = request.body.decode('utf-8')
         body = json.loads(body)
+        return body
     except:
         return False
-    return body
+
+query = Query()
+signupp = Signup()
 
 
 # endpoint per la signup
