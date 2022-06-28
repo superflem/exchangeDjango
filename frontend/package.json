@@ -20,20 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "compilaApp": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/App.tsx",
-    "compilaLogin": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Login.tsx",
-    "compilaNavbar": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Navbar.tsx",
-    "compilaNavbarLoggato": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/NavbarLoggato.tsx",
-    "compilaSignup": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Signup.tsx",
-    "compilaLoggato": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Loggato.tsx",
-    "compilaHome": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Home.tsx",
-    "compilaSoldi": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Soldi.tsx",
-    "compilaDeposito": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Deposito.tsx",
-    "compilaWithdraw": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Withdraw.tsx",
-    "compilaBuy": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/Buy.tsx",
-    "compilaList": "tsc --outDir ./src/build --jsx react-jsx ./src/typescript/ListTransactions.tsx",
-    "compila": "concurrently \"npm run compilaApp\" \"npm run compilaLogin\" \"npm run compilaNavbar\" \"npm run compilaNavbarLoggato\" \"npm run compilaSignup\" \"npm run compilaLoggato\" \"npm run compilaHome\" \"npm run compilaSoldi\" \"npm run compilaDeposito\" \"npm run compilaWithdraw\" \"npm run compilaBuy\" \"npm run compilaList\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

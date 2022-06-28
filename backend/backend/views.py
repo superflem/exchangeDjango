@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 import json # già installato
 from django.http import  HttpResponse, FileResponse
 import jwt
-from db.views import Query # importo le query al db
+from db.query import Query # importo le query al db
 from db.signup import Signup
 # from backend.controllaCorpo.controlla_corpo as controlla_corpo
 
@@ -47,7 +47,7 @@ def queryy(request):
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
 
-        [euro, dollari, nome] = query.query(decodificato["id"])
+        [euro, dollari, nome] = query.query(decodificato["id"]["id"])
         return HttpResponse(json.dumps({"ridirezione": False, "isTuttoOk":True, "euro": euro, "dollari": dollari, "nome": nome}))
     except Exception as e:
         return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
@@ -86,11 +86,11 @@ def deposit_withdraw_buy(request):
         risposta = {}
         # in base alla richiesta, eseguo una determinata funzione
         if (request.path == "/buy/"): 
-            risposta = query.buy(decodificato["id"], body["valuta"], body["valore"])
+            risposta = query.buy(decodificato["id"]["id"], body["valuta"], body["valore"])
         elif (request.path == "/deposit/"):
-            risposta = query.deposit(decodificato["id"], body["valuta"], body["valore"])
+            risposta = query.deposit(decodificato["id"]["id"], body["valuta"], body["valore"])
         else:
-            risposta = query.withdraw(decodificato["id"], body["valuta"], body["valore"])
+            risposta = query.withdraw(decodificato["id"]["id"], body["valuta"], body["valore"])
 
         return HttpResponse(json.dumps(risposta))
     except Exception as e:
@@ -114,7 +114,7 @@ def listTransactions(request):
     try: # provo a decodificare il jwt, se non ci riesco vuol dire che non ce
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
         
-        risposta = query.listTransactions(decodificato["id"], body["valuta"], body["data"])
+        risposta = query.listTransactions(decodificato["id"]["id"], body["valuta"], body["data"])
 
         return HttpResponse(json.dumps(risposta))
     except Exception as e:
@@ -130,7 +130,7 @@ def uploadImage(request):
     try:
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
 
-        risposta = query.updateImage(decodificato["id"], request.FILES["foto"])
+        risposta = query.updateImage(decodificato["id"]["id"], request.FILES["foto"])
 
         return HttpResponse(json.dumps(risposta))
 
@@ -149,7 +149,7 @@ def getImage(request):
         decodificato = jwt.decode(request.COOKIES["jwt"], "password", algorithms=["HS256"]) # decodifico il token
         
 
-        risposta = query.getImage(decodificato["id"])
+        risposta = query.getImage(decodificato["id"]["id"])
 
         return FileResponse(risposta)
     except Exception as e:
