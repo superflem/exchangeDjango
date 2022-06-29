@@ -5,6 +5,29 @@ import {useState} from 'react';
 import axios from 'axios';
 import {controllaValuta} from './Buy';
 const parse = require('html-react-parser');
+
+export const controllaData = (data = "") => { // controllo della data
+    if (data === "") // la data può essere vuota
+        return true;
+
+    if (data.length !== 10) // controllo la dimensione
+        return false;
+
+    if (parseInt(data.substring(0, 4))+"" === "NaN") // controllo l'anno
+        return false;
+
+    if (parseInt(data.substring(5, 7))+"" === "NaN") // controllo il mese
+        return false;
+
+    if (parseInt(data.substring(8, 10))+"" === "NaN") // controllo il giorno
+        return false;
+
+    if (data.charAt(4) !== '-' && data.charAt(7) !== '-') // controllo i trattini
+        return false;
+
+    return true;
+}
+
 const ListTransactions = () => {
 
     const [tabella, setTabella] = useState('');
@@ -86,6 +109,11 @@ const ListTransactions = () => {
 
         if (valuta !== "" && !controllaValuta(valuta)) { // controlla la valuta
             alert("Non hai inserito correttamente la valuta");
+            return;
+        }
+
+        if (data !== "" && !controllaData(data)) { 
+            alert("Non hai inserito correttamente la valuta"); // controllo della data
             return;
         }
 
