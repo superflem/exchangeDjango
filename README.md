@@ -1,20 +1,5 @@
 # Per eseguire il frontend è necessario avere installato NodeJs: https://nodejs.dev/
 
-## FRONTEND
-Nella cartella di root del frontend, lanciare i seguenti comandi:
-
-### `npm install`
-Installa tutti i moduli necessari presenti in package.json per eseguire i file
-
-### `npm start`
-Esegue l'applicazione React. Apri [http://localhost:3000](http://localhost:3000) nel browser.
-Se non funziona, lanciarlo da amministratore
-
-### `npm test`
-Esegue i test presenti nella cartella /src/test
-
-----
-
 ## BACKEND
 Nella cartella di root del backend lanciare il seguente comando:
 
@@ -30,6 +15,22 @@ Lancia il backend
 
 #### `python manage.py test`
 Esegue i test
+
+----
+
+
+## FRONTEND
+Nella cartella di root del frontend, lanciare i seguenti comandi:
+
+### `npm install`
+Installa tutti i moduli necessari presenti in package.json per eseguire i file
+
+### `npm start`
+Esegue l'applicazione React. Apri [http://localhost:3000](http://localhost:3000) nel browser.
+Se non funziona, lanciarlo da amministratore
+
+### `npm test`
+Esegue i test presenti nella cartella /src/test
 
 ----
 
