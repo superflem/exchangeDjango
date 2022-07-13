@@ -5,6 +5,8 @@ from django.http import  HttpResponse, FileResponse
 import jwt
 from db.query import Query # importo le query al db
 from db.signup import Signup
+import requests # pip install requests
+import xmltodict # pip install xmltodict
 # from backend.controllaCorpo.controlla_corpo as controlla_corpo
 
 # controlla_corpo = controllaCorpo.controlla_corpo
@@ -154,3 +156,22 @@ def getImage(request):
         return FileResponse(risposta)
     except Exception as e:
         return HttpResponse(json.dumps({"ridirezione": True, "isTuttoOk":False}))
+
+
+# endpoint per restituire il tasso di cambio attuale
+@api_view(['OPTION', 'GET'])
+def cambio(request):
+    if (str(request.method) == 'OPTION'): # se è il preflight
+        return HttpResponse("option")
+
+    url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml?46f0dd7988932599cb1bcac79a10a16a"
+    response = requests.get(url) # contatto il link e trasformo il file xml in un dizionario
+    data = xmltodict.parse(response.content)
+
+    cambio = 1
+    for valute in data["gesmes:Envelope"]["Cube"]["Cube"]["Cube"]: #cerco i dollari
+        if (valute["@currency"] == "USD"):
+            cambio = valute["@rate"]
+            break
+
+    return HttpResponse(cambio)
