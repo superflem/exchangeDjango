@@ -61,7 +61,7 @@ const ListTransactions = () => {
         else {
             if (oggetto["isTuttoOk"])  {
                 if (oggetto["listaTransizioni"] != '[]')
-                    creaTabella(oggetto["listaTransizioni"]); //creo la tabella 
+                    creaTabella(oggetto["listaTransizioni"].reverse()); //creo la tabella 
             }
             else
                 alert(oggetto["messaggio"]);   
@@ -136,6 +136,19 @@ const ListTransactions = () => {
         <div className="listTransactions">
             <h1>Storico delle transizioni</h1>
 
+            <h2>Filtri</h2>
+            <form id = "form" onSubmit = {handleLoginForm}>
+                <input type="date" id="data" name="data" /> <br /> <br />
+
+                <select id="valuta" name="valuta" form='form'>
+                    <option value="">Nessuna</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select> <br /> <br />
+                <input id='bottoneInterno' type='submit'/>
+            </form>
+            <br />
+
             <table>
                 <thead>
                     <tr>
@@ -148,18 +161,6 @@ const ListTransactions = () => {
                     {parse(tabella) /* creo la tabella*/ }
                 </tbody>
             </table>
-            
-            <h2>Filtri</h2>
-            <form id = "form" onSubmit = {handleLoginForm}>
-                <input type="date" id="data" name="data" /> <br /> <br />
-
-                <select id="valuta" name="valuta" form='form'>
-                    <option value="">Nessuna</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                </select> <br /> <br />
-                <input id='bottoneInterno' type='submit'/>
-            </form>
         </div> 
     );
 }
