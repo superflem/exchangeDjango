@@ -2,7 +2,8 @@ import '../css/App.css';
 import Login from './Login';
 import Signup from './Signup';
 import Navbar from './Navbar';
-import Loggato from './Loggato'
+import Loggato from './Loggato';
+import Cambio from './Cambio';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'; //servono per andare in diverse pagine
 
@@ -20,6 +21,11 @@ function App() {
           <Route exact path='/signup'>
             <Navbar />
             <Signup />
+          </Route>
+
+          <Route exact path='/cambio'>
+            <Navbar />
+            <Cambio />
           </Route>
 
           <Route path='*'>  {/* una qualsiasi altra pagina*/}
